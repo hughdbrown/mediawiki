@@ -3,6 +3,10 @@
 A self-contained instance of MediaWiki with data volume support. Based on the work by
 [Nick Stenning](https://github.com/nickstenning/dockerfiles/tree/master/mediawiki).
 
+[mw]: https://www.mediawiki.org/
+[nginx]: http://nginx.org/
+[php-fpm]: http://php-fpm.org/
+
 This image contains a basic installation of [MediaWiki][mw], powered by [nginx][nginx],
 [php-fpm][php-fpm], and [sqlite][sqlite].
 
