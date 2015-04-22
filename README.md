@@ -8,7 +8,7 @@ A self-contained instance of MediaWiki with data volume support. Based on the wo
 [php-fpm]: http://php-fpm.org/
 [sqlite]: http://sqlite.org/
 [supervisor]: http://supervisord.org/
-[docker]:i https://www.docker.com/
+[docker]: https://www.docker.com/
 
 This image contains a basic [docker-powerer][docker] installation of [MediaWiki][mw], powered by [nginx][nginx],
 [php-fpm][php-fpm], and [sqlite][sqlite].
