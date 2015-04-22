@@ -10,7 +10,7 @@ A self-contained instance of MediaWiki with data volume support. Based on the wo
 [supervisor]: http://supervisord.org/
 [docker]: https://www.docker.com/
 
-This image contains a basic [docker-powerer][docker] installation of [MediaWiki][mw], powered by [nginx][nginx],
+This image contains a basic [docker-powered][docker] installation of [MediaWiki][mw], powered by [nginx][nginx],
 [php-fpm][php-fpm], and [sqlite][sqlite].
 
 The setup requires `LocalSettings.php`and
