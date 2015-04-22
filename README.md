@@ -6,6 +6,7 @@ A self-contained instance of MediaWiki with data volume support. Based on the wo
 [mw]: https://www.mediawiki.org/
 [nginx]: http://nginx.org/
 [php-fpm]: http://php-fpm.org/
+[sqlite]: http://sqlite.org/
 
 This image contains a basic installation of [MediaWiki][mw], powered by [nginx][nginx],
 [php-fpm][php-fpm], and [sqlite][sqlite].
