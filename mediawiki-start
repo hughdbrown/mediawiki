@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -eu
+
+ln -snf -t /src/mediawiki /data/wiki/LocalSettings.php
+ln -snf -t /src/mediawiki/db /data/wiki/wiki.sqlite
+
+exec /usr/bin/supervisord
