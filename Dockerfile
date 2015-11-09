@@ -55,9 +55,9 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 
 # Add system service config.
 ADD	conf/nginx.conf /etc/nginx/nginx.conf
-ADD	conf./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD	conf./fpm.conf /etc/php5/fpm/php-fpm.conf
-ADD	conf./fpm-pool-www.conf /etc/php5/fpm/pool.d/www.conf
+ADD	conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD	conf/fpm.conf /etc/php5/fpm/php-fpm.conf
+ADD	conf/fpm-pool-www.conf /etc/php5/fpm/pool.d/www.conf
 
 # Install mediawiki.
 ADD	http://download.wikimedia.org/mediawiki/${MEDIAWIKI_VERSION}/${MEDIAWIKI_TAR_GZ} /
