@@ -7,7 +7,7 @@
 # - uses sqlite for database
 # Includes LocalSettings.php and wiki.sqlite to bootstrap.
 
-FROM	ubuntu:14.04
+FROM    ubuntu:latest
 MAINTAINER Hugh Brown <hughdbrown@yahoo.com>
 
 ENV MEDIAWIKI_VERSION 1.25
@@ -15,32 +15,32 @@ ENV MEDIAWIKI_FULL_VERSION 1.25.3
 ENV MEDIAWIKI_TAR_GZ mediawiki-${MEDIAWIKI_FULL_VERSION}.tar.gz 
 
 # Configure apt.
-RUN	echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty universe' >> /etc/apt/sources.list
-RUN	apt-get -y update
+RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ wily universe' >> /etc/apt/sources.list
+RUN apt-get -y update
 
 # Fix services that do not start in ubuntu.
 # https://jpetazzo.github.io/2013/10/06/policy-rc-d-do-not-start-services-automatically/
 # http://askubuntu.com/questions/365911/why-the-services-do-not-start-at-installation
-RUN     sed -i 's/101/0/g' /usr/sbin/policy-rc.d
+RUN sed -i 's/101/0/g' /usr/sbin/policy-rc.d
 
 # Install prereqs.
-RUN	LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	apt-utils \
-	ca-certificates \
-	libreadline-dev net-tools curl wget
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-utils \
+    ca-certificates \
+    libreadline-dev net-tools curl wget
 
 # Install server software.
-RUN	LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	supervisor \
-	nginx-light \
-	php5
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    supervisor \
+    nginx-light \
+    php5
 
 # Install php5 packages.
-RUN	LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	php5-fpm \
-	php5-apcu php5-gd php5-intl \
-	php5-common php5-json \
-	php5-sqlite
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    php5-fpm \
+    php5-apcu php5-gd php5-intl \
+    php5-common php5-json \
+    php5-sqlite
 
 # Install gpg keys.
 # I can't swear that this is necessary.
@@ -60,19 +60,18 @@ ADD	conf/fpm.conf /etc/php5/fpm/php-fpm.conf
 ADD	conf/fpm-pool-www.conf /etc/php5/fpm/pool.d/www.conf
 
 # Install mediawiki.
-ADD	http://download.wikimedia.org/mediawiki/${MEDIAWIKI_VERSION}/${MEDIAWIKI_TAR_GZ} /
-RUN	mkdir /src && cd /src && \
-	tar zxf /${MEDIAWIKI_TAR_GZ} && \
-	ln -snf mediawiki-${MEDIAWIKI_FULL_VERSION} mediawiki && \
-	mkdir -p /src/mediawiki/db && \
-	chown -R www-data:www-data /src/mediawiki/
+ADD http://download.wikimedia.org/mediawiki/${MEDIAWIKI_VERSION}/${MEDIAWIKI_TAR_GZ} /
+RUN mkdir /src && cd /src && \
+    tar zxf /${MEDIAWIKI_TAR_GZ} && \
+    ln -snf mediawiki-${MEDIAWIKI_FULL_VERSION} mediawiki && \
+    mkdir -p /src/mediawiki/db && \
+    chown -R www-data:www-data /src/mediawiki/
 
 # Add startup script.
-ADD	./mediawiki-start /usr/bin/mediawiki-start
+ADD ./mediawiki-start /usr/bin/mediawiki-start
 
 # Expose nginx on port 80.
-EXPOSE	80
+EXPOSE  80
 
 # Use script to start supervisor to control server processes.
-ENTRYPOINT	["/usr/bin/mediawiki-start"]
-
+ENTRYPOINT  ["/usr/bin/mediawiki-start"]
