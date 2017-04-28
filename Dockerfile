@@ -1,4 +1,4 @@
-# Dockerfile to spin up mediawiki 1.24.2 site that uses
+# Dockerfile to spin up mediawiki $MEDIAWIKI_VERSION site that uses
 # - nginx to serve requests
 # - php5 with php-fpm with pooling
 # - supervisor to manage server processes
